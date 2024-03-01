@@ -1,10 +1,11 @@
 <html>
     <head>
+        <script src="model.js"></script>
         <script src="controller.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button type="button" onclick="addData()">Add</button>
+        <button type="button" onclick="addData(document.getElementById('dataTableBody'))">Add</button>
         <table id="dataTable">
             <tbody id="dataTableBody">
                 <tr>
@@ -12,20 +13,26 @@
                     <th>Nachname</th>
                     <th>PLZ</th>
                 </tr>
-                <tr>
-                    <td>Hans</td>
-                    <td>Meier</td>
-                    <td>1234</td>
-                </tr>
             </tbody>
         </table>
         <div id="detailView">
             <form>
-                <label for="t1">Vorname</label>             <input id="t1"  type="text" pattern="[A-Z]*">
-                <label for="t2">Nachname</label>            <input id="t2"  type="text" pattern="[A-Z]*">
-                <label for="t3">PLZ</label>              <input id="t3" type="number">
-                <button type="button" onclick="">Save</button>
+            <label for="firstname">Vorname</label>          <input id="firstname"  type="text" pattern="[A-Z]*">
+            <label for="name">Nachname</label>              <input id="name"  type="text" pattern="[A-Z]*">
+            <label for="plz">PLZ</label>                    <input id="plz" type="number">
+                <button type="button" onclick="submitPerson(
+                    document.getElementById('firstname'),
+                    document.getElementById('name'),
+                    document.getElementById('plz')
+                )">Save</button>
             </form>
         </div>
     </body>
+    <script>
+        addDetailViewChangeListener(
+            document.getElementById('firstname'),
+            document.getElementById('name'),
+            document.getElementById('plz')
+        );
+    </script>
 </html>
