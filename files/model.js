@@ -1,3 +1,5 @@
+const persons = [];
+
 class Person {
     name;
     firstName;
@@ -11,13 +13,7 @@ class Person {
     }
 }
 
-const persons= [];
-
-function savePerson(firstname, name, plz, id){
-    console.log(firstname);
-    console.log(name);
-    console.log(plz)
-    console.log(id);
+function savePerson(firstname, name, plz, id) {
     const current = getPersonByID(id);
     if (current){
         current.firstName = firstname;
