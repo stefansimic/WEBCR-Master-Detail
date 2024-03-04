@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <script src="model.js"></script>
+        <script src="controller.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="tableView">
+            <button class="tableButton" type="button" onclick="addData(document.getElementById('dataTableBody'))">Add</button>
+            <table id="dataTable">
+                <tbody id="dataTableBody">
+                    <tr>
+                        <th>Vorname</th>
+                        <th>Nachname</th>
+                        <th>PLZ</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="detailView">
+            <form>
+                <div class="input-block"><label for="firstname">Vorname</label>          <input id="firstname"  type="text" pattern="[A-Z]*"></div>
+                <div class="input-block"><label for="name">Nachname</label>              <input id="name"  type="text" pattern="[A-Z]*"></div>
+                <div class="input-block"><label for="plz">PLZ</label>                    <input id="plz" type="number"></div>
+                <div class="input-block">
+                    <button type="button" onclick="submitPerson(
+                        document.getElementById('firstname'),
+                        document.getElementById('name'),
+                        document.getElementById('plz')
+                    )">Save</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        addDetailViewChangeListener(
+            document.getElementById('firstname'),
+            document.getElementById('name'),
+            document.getElementById('plz')
+        );
+
+        addTableDataChangeListener(document.getElementById('dataTableBody'));
+    </script>
+</html>

@@ -1,0 +1,33 @@
+table, td, th {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+tr{
+    height: 20px;
+}
+
+#detailView {
+    max-width: 20%;
+    border: 1px solid;
+}
+
+.input-block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+}
+
+.tableButton {
+    margin-bottom: 1em;
+}
+
+.tableView {
+    width: 30%;
+    margin-bottom: 2em;
+}
