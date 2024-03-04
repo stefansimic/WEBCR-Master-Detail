@@ -22,11 +22,13 @@
                 <div class="input-block"><label for="firstname">Vorname</label>          <input id="firstname"  type="text" pattern="[A-Z]*"></div>
                 <div class="input-block"><label for="name">Nachname</label>              <input id="name"  type="text" pattern="[A-Z]*"></div>
                 <div class="input-block"><label for="plz">PLZ</label>                    <input id="plz" type="number"></div>
+                <div class="input-block"><label for="ort">Ort</label>                    <input id="ort" type="text" pattern="[A-Z]*"></div>
                 <div class="input-block">
                     <button type="button" onclick="submitPerson(
-                        document.getElementById('firstname'),
-                        document.getElementById('name'),
-                        document.getElementById('plz')
+                        document.getElementById('firstname').value,
+                        document.getElementById('name').value,
+                        document.getElementById('plz').value,
+                        document.getElementById('ort').value
                     )">Save</button>
                 </div>
             </form>
@@ -36,7 +38,8 @@
         addDetailViewChangeListener(
             document.getElementById('firstname'),
             document.getElementById('name'),
-            document.getElementById('plz')
+            document.getElementById('plz'),
+            document.getElementById('ort')
         );
 
         addTableDataChangeListener(document.getElementById('dataTableBody'));

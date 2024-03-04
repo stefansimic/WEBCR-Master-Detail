@@ -2,57 +2,60 @@ let dataID = 0;
 let selectedPerson;
 let personObserver;
 let personListObserver;
+const model = {savePerson, getPersonByID, persons};
 
-function addData(dataTableBody){
-    const trID = "TR-" + dataID;
-
-    savePerson("", "", "", trID)
-
-    selectedPerson = getPersonByID(trID);
-    personObserver.next(selectedPerson);
-
-    dataID++;
-    personListObserver.next(persons);
-}
-
-function loadPerson(trID){
-    selectedPerson = getPersonByID(trID);
-    personObserver.next(selectedPerson);
-}
-
-function addDetailViewChangeListener(firstname, name, plz) {
-    personObserver = new PersonObserver(firstname, name, plz);
+function addDetailViewChangeListener(firstnameElem, nameElem, plzElem, ortElem) {
+    personObserver = new PersonObserver(firstnameElem, nameElem, plzElem, ortElem);
 }
 
 function addTableDataChangeListener(dataTableBody) {
     personListObserver = new PersonListObserver(dataTableBody);
 }
 
-function submitPerson(firstname, name, plz) {
-    savePerson(firstname.value, name.value, plz.value, selectedPerson.id);
-    personListObserver.next(persons);
+function addData(dataTableBody){
+    const trID = "TR-" + dataID;
+
+    model.savePerson("", "", "", "", trID)
+
+    selectedPerson = model.getPersonByID(trID);
+    personObserver.next(selectedPerson);
+
+    dataID++;
+    personListObserver.next(model.persons);
+}
+
+function loadPerson(trID){
+    selectedPerson = model.getPersonByID(trID);
+    personObserver.next(selectedPerson);
+}
+
+function submitPerson(firstname, name, plz, ort) {
+    model.savePerson(firstname, name, plz, ort, selectedPerson.id);
+    personListObserver.next(model.persons);
 }
 
 class PersonObserver {
-    firstname;
-    name;
-    plz;
+    firstnameElem;
+    nameElem;
+    plzElem;
+    ortElem;
 
-    constructor(firstname, name, plz) {
-        this.firstname = firstname;
-        this.name = name;
-        this.plz = plz;
+    constructor(firstnameElem, nameElem, plzElem, ortElem) {
+        this.firstnameElem = firstnameElem;
+        this.nameElem = nameElem;
+        this.plzElem = plzElem;
+        this.ortElem = ortElem;
     }
 
     next(data) {
-        this.firstname.value = data?.firstName ? data?.firstName : "";
-        this.name.value = data?.name ? data?.name : "";
-        this.plz.value = data?.plz ? data?.plz : "";
+        this.firstnameElem.value = data?.firstName ? data?.firstName : "";
+        this.nameElem.value = data?.name ? data?.name : "";
+        this.plzElem.value = data?.plz ? data?.plz : "";
+        this.ortElem.value = data?.ort ? data?.ort : "";
     }
 }
 
 class PersonListObserver {
-    persons;
     dataTableBody;
 
     constructor(dataTableBody) {
@@ -60,7 +63,6 @@ class PersonListObserver {
     }
 
     next(data) {
-    
         let newInnerHTML = "<tr><th>Vorname</th><th>Nachname</th><th>PLZ</th></tr>";
         
         data.forEach((p) => {
